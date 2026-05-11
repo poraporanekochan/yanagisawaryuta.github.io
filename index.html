@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>柳澤隆太</title>
+<script>
+  (function(d) {
+    var config = { kitId: 'qph1yim', scriptTimeout: 3000, async: true },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+</script>
+<style>
+:root {
+  --min: dnp-shuei-nmincho-std, 'Hiragino Mincho ProN', 'YuMincho', serif;
+  --mono: ui-monospace, 'SF Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: var(--min);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 64px 28px 100px;
+  line-height: 1;
+}
+.profile { margin-bottom: 56px; }
+.name { font-size: 1.45rem; font-weight: 500; letter-spacing: 0.1em; margin-bottom: 14px; }
+.links { display: flex; gap: 18px; }
+.links a { font-family: var(--mono); font-size: 0.68rem; color: #aaa; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+.links a:hover { color: #1a1a1a; }
+.index-list { list-style: none; }
+.index-item { display: flex; align-items: baseline; gap: 20px; padding: 14px 0; border-bottom: 1px solid #eeebe6; cursor: pointer; transition: opacity 0.15s; }
+.index-item:first-child { border-top: 1px solid #eeebe6; }
+.index-item:hover { opacity: 0.5; }
+.index-date { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: #bbb; white-space: nowrap; flex-shrink: 0; }
+.index-title { font-size: 0.9rem; letter-spacing: 0.04em; color: #1a1a1a; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.index-has-photo { font-family: var(--mono); font-size: 0.6rem; color: #ccc; margin-left: auto; flex-shrink: 0; }
+.new-btn { display: block; margin-bottom: 40px; background: none; border: none; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.15em; color: #bbb; cursor: pointer; padding: 0; transition: color 0.2s; }
+.new-btn:hover { color: #1a1a1a; }
+.form-wrap { border-top: 1px solid #eeebe6; padding-top: 28px; margin-bottom: 48px; }
+.f-title { width: 100%; background: none; border: none; outline: none; font-family: var(--min); font-size: 1rem; letter-spacing: 0.05em; color: #1a1a1a; border-bottom: 1px solid #eeebe6; padding: 6px 0 10px; margin-bottom: 20px; }
+.f-title::placeholder { color: #ccc; }
+.f-body { width: 100%; background: none; border: none; outline: none; font-family: var(--min); font-size: 0.88rem; line-height: 2; color: #444; resize: none; min-height: 100px; margin-bottom: 20px; }
+.f-body::placeholder { color: #ccc; }
+.f-photo-label { display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; color: #aaa; border: 1px solid #ddd; padding: 6px 14px; cursor: pointer; margin-bottom: 16px; transition: all 0.2s; }
+.f-photo-label:hover { color: #1a1a1a; border-color: #1a1a1a; }
+#f-photos { display: none; }
+.f-preview { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
+.f-preview img { width: 72px; height: 72px; object-fit: cover; }
+.f-actions { display: flex; gap: 12px; align-items: center; }
+.post-btn { background: #1a1a1a; color: #fff; border: none; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.18em; padding: 9px 22px; cursor: pointer; transition: opacity 0.2s; }
+.post-btn:hover { opacity: 0.7; }
+.cancel-btn { background: none; border: none; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; color: #bbb; cursor: pointer; transition: color 0.2s; }
+.cancel-btn:hover { color: #1a1a1a; }
+#view-post { display: none; }
+.back-btn { background: none; border: none; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; color: #bbb; cursor: pointer; padding: 0; margin-bottom: 48px; display: block; transition: color 0.2s; }
+.back-btn:hover { color: #1a1a1a; }
+.post-date { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: #bbb; margin-bottom: 20px; display: block; }
+.post-title { font-size: 1.2rem; font-weight: 500; letter-spacing: 0.06em; margin-bottom: 28px; line-height: 1.6; }
+.post-body { font-size: 0.9rem; line-height: 2.1; color: #444; margin-bottom: 40px; }
+.post-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-bottom: 40px; }
+.post-photos img { width: 100%; aspect-ratio: 1; object-fit: cover; cursor: pointer; transition: opacity 0.2s; }
+.post-photos img:hover { opacity: 0.85; }
+.post-photos.single { grid-template-columns: 1fr; }
+.post-photos.single img { aspect-ratio: 4/3; }
+.post-photos.two { grid-template-columns: repeat(2, 1fr); }
+.admin-row { display: flex; gap: 16px; padding-top: 24px; border-top: 1px solid #eeebe6; }
+.del-post-btn { background: none; border: none; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; cursor: pointer; padding: 0; color: #ddd; transition: color 0.2s; }
+.del-post-btn:hover { color: #c00; }
+.modal { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.92); z-index: 999; align-items: center; justify-content: center; }
+.modal.open { display: flex; }
+.modal img { max-width: 94vw; max-height: 94vh; object-fit: contain; }
+.pw-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+.pw-input { background: none; border: none; border-bottom: 1px solid #e0ddd8; outline: none; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: #1a1a1a; padding: 6px 0; width: 160px; }
+.pw-btn { background: none; border: none; font-family: var(--mono); font-size: 0.62rem; color: #aaa; cursor: pointer; transition: color 0.2s; }
+.pw-btn:hover { color: #1a1a1a; }
+.pw-hint { font-family: var(--mono); font-size: 0.62rem; color: #ccc; }
+.empty { font-family: var(--mono); font-size: 0.68rem; color: #ccc; letter-spacing: 0.1em; padding: 8px 0; }
+</style>
+</head>
+<body>
+<div class="profile">
+  <div class="name">柳澤隆太</div>
+  <div class="links">
+    <a href="mailto:yanagisawaryu@icloud.com">yanagisawaryu@icloud.com</a>
+    <a href="https://instagram.com/r.y.u_ta" target="_blank">@r.y.u_ta</a>
+  </div>
+</div>
+<div id="view-index">
+  <div class="pw-wrap" id="pw-wrap">
+    <input class="pw-input" id="pw-input" type="password" placeholder="password">
+    <button class="pw-btn" onclick="checkPw()">→</button>
+    <span class="pw-hint" id="pw-hint"></span>
+  </div>
+  <div id="admin-area" style="display:none">
+    <button class="new-btn" onclick="toggleForm()">+ 新しい投稿</button>
+    <div class="form-wrap" id="form-wrap" style="display:none">
+      <input class="f-title" id="f-title" type="text" placeholder="タイトル">
+      <textarea class="f-body" id="f-body" placeholder="今日のこと…"></textarea>
+      <label class="f-photo-label" for="f-photos">+ 写真を追加</label>
+      <input type="file" id="f-photos" accept="image/*" multiple onchange="previewPhotos(event)">
+      <div class="f-preview" id="f-preview"></div>
+      <div class="f-actions">
+        <button class="post-btn" onclick="addPost()">post</button>
+        <button class="cancel-btn" onclick="toggleForm()">cancel</button>
+      </div>
+    </div>
+  </div>
+  <ul class="index-list" id="index-list"></ul>
+</div>
+<div id="view-post">
+  <button class="back-btn" onclick="showIndex()">← もどる</button>
+  <span class="post-date" id="p-date"></span>
+  <div class="post-title" id="p-title"></div>
+  <div class="post-body" id="p-body"></div>
+  <div class="post-photos" id="p-photos"></div>
+  <div class="admin-row" id="p-admin" style="display:none">
+    <button class="del-post-btn" onclick="deleteCurrentPost()">削除</button>
+  </div>
+</div>
+<div class="modal" id="modal" onclick="this.classList.remove('open')">
+  <img id="modal-img" src="" alt="">
+</div>
+<script>
+const PASSWORD = 'b3161142';
+let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+let isAdmin = false;
+let currentPostId = null;
+let pendingPhotos = [];
+function save() { try { localStorage.setItem('posts', JSON.stringify(posts)); } catch(e) {} }
+function checkPw() {
+  const val = document.getElementById('pw-input').value;
+  if (val === PASSWORD) {
+    isAdmin = true;
+    document.getElementById('pw-wrap').style.display = 'none';
+    document.getElementById('admin-area').style.display = 'block';
+  } else {
+    document.getElementById('pw-hint').textContent = '違います';
+    setTimeout(() => document.getElementById('pw-hint').textContent = '', 1500);
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPw(); });
+function toggleForm() { const fw = document.getElementById('form-wrap'); fw.style.display = fw.style.display === 'none' ? 'block' : 'none'; }
+function previewPhotos(e) {
+  pendingPhotos = [];
+  const preview = document.getElementById('f-preview');
+  preview.innerHTML = '';
+  Array.from(e.target.files).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = ev => { pendingPhotos.push(ev.target.result); const img = document.createElement('img'); img.src = ev.target.result; preview.appendChild(img); };
+    reader.readAsDataURL(file);
+  });
+}
+function addPost() {
+  const title = document.getElementById('f-title').value.trim();
+  const body = document.getElementById('f-body').value.trim();
+  if (!title && !body) return;
+  posts.unshift({ id: Date.now(), title: title || '無題', body, photos: [...pendingPhotos], date: fmtDate(new Date()) });
+  save();
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-body').value = '';
+  document.getElementById('f-preview').innerHTML = '';
+  document.getElementById('f-photos').value = '';
+  pendingPhotos = [];
+  document.getElementById('form-wrap').style.display = 'none';
+  renderIndex();
+}
+function renderIndex() {
+  const el = document.getElementById('index-list');
+  if (!posts.length) { el.innerHTML = '<p class="empty">まだ投稿がありません</p>'; return; }
+  el.innerHTML = posts.map(p => `<li class="index-item" onclick="showPost(${p.id})"><span class="index-date">${p.date}</span><span class="index-title">${p.title}</span>${p.photos && p.photos.length ? '<span class="index-has-photo">photo</span>' : ''}</li>`).join('');
+}
+function showPost(id) {
+  const p = posts.find(x => x.id === id);
+  if (!p) return;
+  currentPostId = id;
+  document.getElementById('p-date').textContent = p.date;
+  document.getElementById('p-title').textContent = p.title;
+  document.getElementById('p-body').innerHTML = p.body.replace(/\n/g, '<br>');
+  const ph = document.getElementById('p-photos');
+  if (p.photos && p.photos.length) {
+    ph.className = p.photos.length === 1 ? 'post-photos single' : p.photos.length === 2 ? 'post-photos two' : 'post-photos';
+    ph.innerHTML = p.photos.map(src => `<img src="${src}" onclick="openModal('${src}')" alt="">`).join('');
+  } else { ph.innerHTML = ''; ph.className = 'post-photos'; }
+  document.getElementById('p-admin').style.display = isAdmin ? 'flex' : 'none';
+  document.getElementById('view-index').style.display = 'none';
+  document.getElementById('view-post').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+function showIndex() {
+  document.getElementById('view-post').style.display = 'none';
+  document.getElementById('view-index').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+function deleteCurrentPost() {
+  if (!confirm('この投稿を削除しますか？')) return;
+  posts = posts.filter(p => p.id !== currentPostId);
+  save(); showIndex(); renderIndex();
+}
+function openModal(src) { document.getElementById('modal-img').src = src; document.getElementById('modal').classList.add('open'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.getElementById('modal').classList.remove('open'); });
+function fmtDate(d) { return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0'); }
+renderIndex();
+</script>
+</body>
+</html>
