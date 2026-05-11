@@ -16,15 +16,7 @@
   --mono: ui-monospace, 'SF Mono', monospace;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  background: #ffffff;
-  color: #1a1a1a;
-  font-family: var(--min);
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 64px 28px 100px;
-  line-height: 1;
-}
+body { background: #ffffff; color: #1a1a1a; font-family: var(--min); max-width: 600px; margin: 0 auto; padding: 64px 28px 100px; line-height: 1; }
 .profile { margin-bottom: 56px; }
 .name { font-size: 1.45rem; font-weight: 500; letter-spacing: 0.1em; margin-bottom: 14px; }
 .links { display: flex; gap: 18px; }
@@ -125,11 +117,32 @@ body {
 </div>
 <script>
 const PASSWORD = 'b3161142';
-let posts = JSON.parse(localStorage.getItem('posts') || '[]');
+const SUPABASE_URL = 'https://cmsavuuyobyonatgykwl.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_6dU6mYWBAT6TMUecOuHasA_nVeTNA6O';
+let posts = [];
 let isAdmin = false;
 let currentPostId = null;
 let pendingPhotos = [];
-function save() { try { localStorage.setItem('posts', JSON.stringify(posts)); } catch(e) {} }
+async function sbFetch(path, options = {}) {
+  const res = await fetch(SUPABASE_URL + path, {
+    ...options,
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation', ...(options.headers || {}) }
+  });
+  return res.json();
+}
+async function loadPosts() {
+  const data = await sbFetch('/rest/v1/posts?select=*&order=created_at.desc');
+  posts = Array.isArray(data) ? data : [];
+  renderIndex();
+}
+async function insertPost(post) {
+  await sbFetch('/rest/v1/posts', { method: 'POST', body: JSON.stringify(post) });
+  await loadPosts();
+}
+async function removePost(id) {
+  await sbFetch('/rest/v1/posts?id=eq.' + id, { method: 'DELETE' });
+  await loadPosts();
+}
 function checkPw() {
   const val = document.getElementById('pw-input').value;
   if (val === PASSWORD) {
@@ -153,19 +166,20 @@ function previewPhotos(e) {
     reader.readAsDataURL(file);
   });
 }
-function addPost() {
+async function addPost() {
   const title = document.getElementById('f-title').value.trim();
   const body = document.getElementById('f-body').value.trim();
   if (!title && !body) return;
-  posts.unshift({ id: Date.now(), title: title || '無題', body, photos: [...pendingPhotos], date: fmtDate(new Date()) });
-  save();
+  const btn = document.querySelector('.post-btn');
+  btn.textContent = '投稿中…'; btn.disabled = true;
+  await insertPost({ title: title || '無題', body, photos: [...pendingPhotos], date: fmtDate(new Date()) });
   document.getElementById('f-title').value = '';
   document.getElementById('f-body').value = '';
   document.getElementById('f-preview').innerHTML = '';
   document.getElementById('f-photos').value = '';
   pendingPhotos = [];
   document.getElementById('form-wrap').style.display = 'none';
-  renderIndex();
+  btn.textContent = 'post'; btn.disabled = false;
 }
 function renderIndex() {
   const el = document.getElementById('index-list');
@@ -178,7 +192,7 @@ function showPost(id) {
   currentPostId = id;
   document.getElementById('p-date').textContent = p.date;
   document.getElementById('p-title').textContent = p.title;
-  document.getElementById('p-body').innerHTML = p.body.replace(/\n/g, '<br>');
+  document.getElementById('p-body').innerHTML = p.body ? p.body.replace(/\n/g, '<br>') : '';
   const ph = document.getElementById('p-photos');
   if (p.photos && p.photos.length) {
     ph.className = p.photos.length === 1 ? 'post-photos single' : p.photos.length === 2 ? 'post-photos two' : 'post-photos';
@@ -194,15 +208,15 @@ function showIndex() {
   document.getElementById('view-index').style.display = 'block';
   window.scrollTo(0, 0);
 }
-function deleteCurrentPost() {
+async function deleteCurrentPost() {
   if (!confirm('この投稿を削除しますか？')) return;
-  posts = posts.filter(p => p.id !== currentPostId);
-  save(); showIndex(); renderIndex();
+  await removePost(currentPostId);
+  showIndex();
 }
 function openModal(src) { document.getElementById('modal-img').src = src; document.getElementById('modal').classList.add('open'); }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') document.getElementById('modal').classList.remove('open'); });
 function fmtDate(d) { return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0'); }
-renderIndex();
+loadPosts();
 </script>
 </body>
 </html>
