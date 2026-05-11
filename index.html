@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -15,64 +16,362 @@
   --min: dnp-shuei-nmincho-std, 'Hiragino Mincho ProN', 'YuMincho', serif;
   --mono: ui-monospace, 'SF Mono', monospace;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #ffffff; color: #1a1a1a; font-family: var(--min); max-width: 600px; margin: 0 auto; padding: 64px 28px 100px; line-height: 1; }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: #ffffff;
+color: #1a1a1a;
+font-family: var(–min);
+max-width: 600px;
+margin: 0 auto;
+padding: 64px 28px 100px;
+line-height: 1;
+}
+
+/* ── プロフィール ── */
 .profile { margin-bottom: 56px; }
-.name { font-size: 1.45rem; font-weight: 500; letter-spacing: 0.1em; margin-bottom: 14px; }
+
+.name {
+font-size: 1.45rem;
+font-weight: 500;
+letter-spacing: 0.1em;
+margin-bottom: 14px;
+}
+
 .links { display: flex; gap: 18px; }
-.links a { font-family: var(--mono); font-size: 0.68rem; color: #aaa; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+
+.links a {
+font-family: var(–mono);
+font-size: 0.68rem;
+color: #aaa;
+text-decoration: none;
+letter-spacing: 0.04em;
+transition: color 0.2s;
+}
+
 .links a:hover { color: #1a1a1a; }
+
+/* ── インデックス（日付一覧） ── */
+#view-index {}
+
 .index-list { list-style: none; }
-.index-item { display: flex; align-items: baseline; gap: 20px; padding: 14px 0; border-bottom: 1px solid #eeebe6; cursor: pointer; transition: opacity 0.15s; }
+
+.index-item {
+display: flex;
+align-items: baseline;
+gap: 20px;
+padding: 14px 0;
+border-bottom: 1px solid #eeebe6;
+cursor: pointer;
+transition: opacity 0.15s;
+}
+
 .index-item:first-child { border-top: 1px solid #eeebe6; }
 .index-item:hover { opacity: 0.5; }
-.index-date { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: #bbb; white-space: nowrap; flex-shrink: 0; }
-.index-title { font-size: 0.9rem; letter-spacing: 0.04em; color: #1a1a1a; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.index-has-photo { font-family: var(--mono); font-size: 0.6rem; color: #ccc; margin-left: auto; flex-shrink: 0; }
-.new-btn { display: block; margin-bottom: 40px; background: none; border: none; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.15em; color: #bbb; cursor: pointer; padding: 0; transition: color 0.2s; }
+
+.index-date {
+font-family: var(–mono);
+font-size: 0.7rem;
+letter-spacing: 0.1em;
+color: #bbb;
+white-space: nowrap;
+flex-shrink: 0;
+}
+
+.index-title {
+font-size: 0.9rem;
+letter-spacing: 0.04em;
+color: #1a1a1a;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+}
+
+.index-has-photo {
+font-family: var(–mono);
+font-size: 0.6rem;
+color: #ccc;
+margin-left: auto;
+flex-shrink: 0;
+}
+
+/* ── 投稿フォーム（自分だけ見える） ── */
+.new-btn {
+display: block;
+margin-bottom: 40px;
+background: none;
+border: none;
+font-family: var(–mono);
+font-size: 0.68rem;
+letter-spacing: 0.15em;
+color: #bbb;
+cursor: pointer;
+padding: 0;
+transition: color 0.2s;
+}
+
 .new-btn:hover { color: #1a1a1a; }
-.form-wrap { border-top: 1px solid #eeebe6; padding-top: 28px; margin-bottom: 48px; }
-.f-title { width: 100%; background: none; border: none; outline: none; font-family: var(--min); font-size: 1rem; letter-spacing: 0.05em; color: #1a1a1a; border-bottom: 1px solid #eeebe6; padding: 6px 0 10px; margin-bottom: 20px; }
+
+.form-wrap {
+border-top: 1px solid #eeebe6;
+padding-top: 28px;
+margin-bottom: 48px;
+}
+
+.f-title {
+width: 100%;
+background: none;
+border: none;
+outline: none;
+font-family: var(–min);
+font-size: 1rem;
+letter-spacing: 0.05em;
+color: #1a1a1a;
+border-bottom: 1px solid #eeebe6;
+padding: 6px 0 10px;
+margin-bottom: 20px;
+}
+
 .f-title::placeholder { color: #ccc; }
-.f-body { width: 100%; background: none; border: none; outline: none; font-family: var(--min); font-size: 0.88rem; line-height: 2; color: #444; resize: none; min-height: 100px; margin-bottom: 20px; }
+
+.f-body {
+width: 100%;
+background: none;
+border: none;
+outline: none;
+font-family: var(–min);
+font-size: 0.88rem;
+line-height: 2;
+color: #444;
+resize: none;
+min-height: 100px;
+margin-bottom: 20px;
+}
+
 .f-body::placeholder { color: #ccc; }
-.f-photo-label { display: inline-block; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; color: #aaa; border: 1px solid #ddd; padding: 6px 14px; cursor: pointer; margin-bottom: 16px; transition: all 0.2s; }
+
+.f-photo-label {
+display: inline-block;
+font-family: var(–mono);
+font-size: 0.65rem;
+letter-spacing: 0.12em;
+color: #aaa;
+border: 1px solid #ddd;
+padding: 6px 14px;
+cursor: pointer;
+margin-bottom: 16px;
+transition: all 0.2s;
+}
+
 .f-photo-label:hover { color: #1a1a1a; border-color: #1a1a1a; }
+
 #f-photos { display: none; }
-.f-preview { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 16px; }
-.f-preview img { width: 72px; height: 72px; object-fit: cover; }
+
+.f-preview {
+display: flex;
+flex-wrap: wrap;
+gap: 4px;
+margin-bottom: 16px;
+}
+
+.f-preview img {
+width: 72px;
+height: 72px;
+object-fit: cover;
+}
+
 .f-actions { display: flex; gap: 12px; align-items: center; }
-.post-btn { background: #1a1a1a; color: #fff; border: none; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.18em; padding: 9px 22px; cursor: pointer; transition: opacity 0.2s; }
+
+.post-btn {
+background: #1a1a1a;
+color: #faf9f7;
+border: none;
+font-family: var(–mono);
+font-size: 0.65rem;
+letter-spacing: 0.18em;
+padding: 9px 22px;
+cursor: pointer;
+transition: opacity 0.2s;
+}
+
 .post-btn:hover { opacity: 0.7; }
-.cancel-btn { background: none; border: none; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; color: #bbb; cursor: pointer; transition: color 0.2s; }
+
+.cancel-btn {
+background: none;
+border: none;
+font-family: var(–mono);
+font-size: 0.65rem;
+letter-spacing: 0.1em;
+color: #bbb;
+cursor: pointer;
+transition: color 0.2s;
+}
+
 .cancel-btn:hover { color: #1a1a1a; }
+
+/* ── 個別ページ ── */
 #view-post { display: none; }
-.back-btn { background: none; border: none; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; color: #bbb; cursor: pointer; padding: 0; margin-bottom: 48px; display: block; transition: color 0.2s; }
+
+.back-btn {
+background: none;
+border: none;
+font-family: var(–mono);
+font-size: 0.65rem;
+letter-spacing: 0.12em;
+color: #bbb;
+cursor: pointer;
+padding: 0;
+margin-bottom: 48px;
+display: block;
+transition: color 0.2s;
+}
+
 .back-btn:hover { color: #1a1a1a; }
-.post-date { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; color: #bbb; margin-bottom: 20px; display: block; }
-.post-title { font-size: 1.2rem; font-weight: 500; letter-spacing: 0.06em; margin-bottom: 28px; line-height: 1.6; }
-.post-body { font-size: 0.9rem; line-height: 2.1; color: #444; margin-bottom: 40px; }
-.post-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-bottom: 40px; }
-.post-photos img { width: 100%; aspect-ratio: 1; object-fit: cover; cursor: pointer; transition: opacity 0.2s; }
+
+.post-date {
+font-family: var(–mono);
+font-size: 0.68rem;
+letter-spacing: 0.12em;
+color: #bbb;
+margin-bottom: 20px;
+display: block;
+}
+
+.post-title {
+font-size: 1.2rem;
+font-weight: 500;
+letter-spacing: 0.06em;
+margin-bottom: 28px;
+line-height: 1.6;
+}
+
+.post-body {
+font-size: 0.9rem;
+line-height: 2.1;
+color: #444;
+margin-bottom: 40px;
+}
+
+.post-photos {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 3px;
+margin-bottom: 40px;
+}
+
+.post-photos img {
+width: 100%;
+aspect-ratio: 1;
+object-fit: cover;
+cursor: pointer;
+transition: opacity 0.2s;
+}
+
 .post-photos img:hover { opacity: 0.85; }
+
 .post-photos.single { grid-template-columns: 1fr; }
 .post-photos.single img { aspect-ratio: 4/3; }
 .post-photos.two { grid-template-columns: repeat(2, 1fr); }
-.admin-row { display: flex; gap: 16px; padding-top: 24px; border-top: 1px solid #eeebe6; }
-.del-post-btn { background: none; border: none; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; cursor: pointer; padding: 0; color: #ddd; transition: color 0.2s; }
+
+/* 管理ボタン（自分だけ） */
+.admin-row {
+display: flex;
+gap: 16px;
+padding-top: 24px;
+border-top: 1px solid #eeebe6;
+}
+
+.edit-btn, .del-post-btn {
+background: none;
+border: none;
+font-family: var(–mono);
+font-size: 0.62rem;
+letter-spacing: 0.1em;
+cursor: pointer;
+padding: 0;
+transition: color 0.2s;
+}
+
+.edit-btn { color: #aaa; }
+.edit-btn:hover { color: #1a1a1a; }
+.del-post-btn { color: #ddd; }
 .del-post-btn:hover { color: #c00; }
-.modal { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.92); z-index: 999; align-items: center; justify-content: center; }
+
+/* ── 写真モーダル ── */
+.modal {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(10,10,10,0.92);
+z-index: 999;
+align-items: center;
+justify-content: center;
+}
+
 .modal.open { display: flex; }
-.modal img { max-width: 94vw; max-height: 94vh; object-fit: contain; }
-.pw-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
-.pw-input { background: none; border: none; border-bottom: 1px solid #e0ddd8; outline: none; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: #1a1a1a; padding: 6px 0; width: 160px; }
-.pw-btn { background: none; border: none; font-family: var(--mono); font-size: 0.62rem; color: #aaa; cursor: pointer; transition: color 0.2s; }
+
+.modal img {
+max-width: 94vw;
+max-height: 94vh;
+object-fit: contain;
+}
+
+/* ── パスワード ── */
+.pw-wrap {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 40px;
+}
+
+.pw-input {
+background: none;
+border: none;
+border-bottom: 1px solid #e0ddd8;
+outline: none;
+font-family: var(–mono);
+font-size: 0.7rem;
+letter-spacing: 0.1em;
+color: #1a1a1a;
+padding: 6px 0;
+width: 160px;
+}
+
+.pw-btn {
+background: none;
+border: none;
+font-family: var(–mono);
+font-size: 0.62rem;
+letter-spacing: 0.12em;
+color: #aaa;
+cursor: pointer;
+transition: color 0.2s;
+}
+
 .pw-btn:hover { color: #1a1a1a; }
-.pw-hint { font-family: var(--mono); font-size: 0.62rem; color: #ccc; }
-.empty { font-family: var(--mono); font-size: 0.68rem; color: #ccc; letter-spacing: 0.1em; padding: 8px 0; }
+
+.pw-hint {
+font-family: var(–mono);
+font-size: 0.62rem;
+color: #ccc;
+letter-spacing: 0.08em;
+}
+
+.empty {
+font-family: var(–mono);
+font-size: 0.68rem;
+color: #ccc;
+letter-spacing: 0.1em;
+padding: 8px 0;
+}
 </style>
+
 </head>
 <body>
+
+<!-- プロフィール（常に表示） -->
+
 <div class="profile">
   <div class="name">柳澤隆太</div>
   <div class="links">
@@ -80,12 +379,21 @@ body { background: #ffffff; color: #1a1a1a; font-family: var(--min); max-width: 
     <a href="https://instagram.com/r.y.u_ta" target="_blank">@r.y.u_ta</a>
   </div>
 </div>
+
+<!-- インデックスビュー -->
+
 <div id="view-index">
+
+  <!-- パスワード入力（管理者ログイン） -->
+
   <div class="pw-wrap" id="pw-wrap">
     <input class="pw-input" id="pw-input" type="password" placeholder="password">
     <button class="pw-btn" onclick="checkPw()">→</button>
     <span class="pw-hint" id="pw-hint"></span>
   </div>
+
+  <!-- 新規投稿ボタン（ログイン後） -->
+
   <div id="admin-area" style="display:none">
     <button class="new-btn" onclick="toggleForm()">+ 新しい投稿</button>
     <div class="form-wrap" id="form-wrap" style="display:none">
@@ -100,8 +408,13 @@ body { background: #ffffff; color: #1a1a1a; font-family: var(--min); max-width: 
       </div>
     </div>
   </div>
+
   <ul class="index-list" id="index-list"></ul>
+
 </div>
+
+<!-- 個別投稿ビュー -->
+
 <div id="view-post">
   <button class="back-btn" onclick="showIndex()">← もどる</button>
   <span class="post-date" id="p-date"></span>
@@ -112,37 +425,60 @@ body { background: #ffffff; color: #1a1a1a; font-family: var(--min); max-width: 
     <button class="del-post-btn" onclick="deleteCurrentPost()">削除</button>
   </div>
 </div>
+
+<!-- 写真モーダル -->
+
 <div class="modal" id="modal" onclick="this.classList.remove('open')">
   <img id="modal-img" src="" alt="">
 </div>
+
 <script>
+// ── 設定 ──
 const PASSWORD = 'b3161142';
 const SUPABASE_URL = 'https://cmsavuuyobyonatgykwl.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_6dU6mYWBAT6TMUecOuHasA_nVeTNA6O';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtc2F2dXV5b2J5b25hdGd5a3dsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg0ODA4NjUsImV4cCI6MjA5NDA1Njg2NX0.dzbccwETQQx43bznvFicojB3dYi43qtiaeSdGHGQQO0';
+
+// ── 状態 ──
 let posts = [];
 let isAdmin = false;
 let currentPostId = null;
 let pendingPhotos = [];
+
+// ── Supabase API ──
 async function sbFetch(path, options = {}) {
   const res = await fetch(SUPABASE_URL + path, {
     ...options,
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation', ...(options.headers || {}) }
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation',
+      ...(options.headers || {})
+    }
   });
   return res.json();
 }
+
 async function loadPosts() {
   const data = await sbFetch('/rest/v1/posts?select=*&order=created_at.desc');
   posts = Array.isArray(data) ? data : [];
   renderIndex();
 }
+
 async function insertPost(post) {
-  await sbFetch('/rest/v1/posts', { method: 'POST', body: JSON.stringify(post) });
+  await sbFetch('/rest/v1/posts', {
+    method: 'POST',
+    body: JSON.stringify(post)
+  });
   await loadPosts();
 }
+
 async function removePost(id) {
   await sbFetch('/rest/v1/posts?id=eq.' + id, { method: 'DELETE' });
   await loadPosts();
 }
+
+// ── パスワード ──
 function checkPw() {
   const val = document.getElementById('pw-input').value;
   if (val === PASSWORD) {
@@ -154,69 +490,134 @@ function checkPw() {
     setTimeout(() => document.getElementById('pw-hint').textContent = '', 1500);
   }
 }
-document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') checkPw(); });
-function toggleForm() { const fw = document.getElementById('form-wrap'); fw.style.display = fw.style.display === 'none' ? 'block' : 'none'; }
+
+document.getElementById('pw-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') checkPw();
+});
+
+// ── フォーム ──
+function toggleForm() {
+  const fw = document.getElementById('form-wrap');
+  fw.style.display = fw.style.display === 'none' ? 'block' : 'none';
+}
+
 function previewPhotos(e) {
   pendingPhotos = [];
   const preview = document.getElementById('f-preview');
   preview.innerHTML = '';
   Array.from(e.target.files).forEach(file => {
     const reader = new FileReader();
-    reader.onload = ev => { pendingPhotos.push(ev.target.result); const img = document.createElement('img'); img.src = ev.target.result; preview.appendChild(img); };
+    reader.onload = ev => {
+      pendingPhotos.push(ev.target.result);
+      const img = document.createElement('img');
+      img.src = ev.target.result;
+      preview.appendChild(img);
+    };
     reader.readAsDataURL(file);
   });
 }
+
 async function addPost() {
   const title = document.getElementById('f-title').value.trim();
   const body = document.getElementById('f-body').value.trim();
   if (!title && !body) return;
+
   const btn = document.querySelector('.post-btn');
-  btn.textContent = '投稿中…'; btn.disabled = true;
-  await insertPost({ title: title || '無題', body, photos: [...pendingPhotos], date: fmtDate(new Date()) });
+  btn.textContent = '投稿中…';
+  btn.disabled = true;
+
+  await insertPost({
+    title: title || '無題',
+    body,
+    photos: [...pendingPhotos],
+    date: fmtDate(new Date())
+  });
+
   document.getElementById('f-title').value = '';
   document.getElementById('f-body').value = '';
   document.getElementById('f-preview').innerHTML = '';
   document.getElementById('f-photos').value = '';
   pendingPhotos = [];
   document.getElementById('form-wrap').style.display = 'none';
-  btn.textContent = 'post'; btn.disabled = false;
+  btn.textContent = 'post';
+  btn.disabled = false;
 }
+
+// ── インデックス ──
 function renderIndex() {
   const el = document.getElementById('index-list');
-  if (!posts.length) { el.innerHTML = '<p class="empty">まだ投稿がありません</p>'; return; }
-  el.innerHTML = posts.map(p => `<li class="index-item" onclick="showPost(${p.id})"><span class="index-date">${p.date}</span><span class="index-title">${p.title}</span>${p.photos && p.photos.length ? '<span class="index-has-photo">photo</span>' : ''}</li>`).join('');
+  if (!posts.length) {
+    el.innerHTML = '<p class="empty">まだ投稿がありません</p>';
+    return;
+  }
+  el.innerHTML = posts.map(p => `
+    <li class="index-item" onclick="showPost(${p.id})">
+      <span class="index-date">${p.date}</span>
+      <span class="index-title">${p.title}</span>
+      ${p.photos && p.photos.length ? '<span class="index-has-photo">photo</span>' : ''}
+    </li>
+  `).join('');
 }
+
+// ── 個別投稿 ──
 function showPost(id) {
   const p = posts.find(x => x.id === id);
   if (!p) return;
   currentPostId = id;
+
   document.getElementById('p-date').textContent = p.date;
   document.getElementById('p-title').textContent = p.title;
   document.getElementById('p-body').innerHTML = p.body ? p.body.replace(/\n/g, '<br>') : '';
+
   const ph = document.getElementById('p-photos');
   if (p.photos && p.photos.length) {
     ph.className = p.photos.length === 1 ? 'post-photos single' : p.photos.length === 2 ? 'post-photos two' : 'post-photos';
-    ph.innerHTML = p.photos.map(src => `<img src="${src}" onclick="openModal('${src}')" alt="">`).join('');
-  } else { ph.innerHTML = ''; ph.className = 'post-photos'; }
+    ph.innerHTML = p.photos.map(src =>
+      `<img src="${src}" onclick="openModal('${src}')" alt="">`
+    ).join('');
+  } else {
+    ph.innerHTML = '';
+    ph.className = 'post-photos';
+  }
+
   document.getElementById('p-admin').style.display = isAdmin ? 'flex' : 'none';
   document.getElementById('view-index').style.display = 'none';
   document.getElementById('view-post').style.display = 'block';
   window.scrollTo(0, 0);
 }
+
 function showIndex() {
   document.getElementById('view-post').style.display = 'none';
   document.getElementById('view-index').style.display = 'block';
   window.scrollTo(0, 0);
 }
+
 async function deleteCurrentPost() {
   if (!confirm('この投稿を削除しますか？')) return;
   await removePost(currentPostId);
   showIndex();
 }
-function openModal(src) { document.getElementById('modal-img').src = src; document.getElementById('modal').classList.add('open'); }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') document.getElementById('modal').classList.remove('open'); });
-function fmtDate(d) { return d.getFullYear() + '.' + String(d.getMonth()+1).padStart(2,'0') + '.' + String(d.getDate()).padStart(2,'0'); }
+
+// ── モーダル ──
+function openModal(src) {
+  document.getElementById('modal-img').src = src;
+  document.getElementById('modal').classList.add('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('modal').classList.remove('open');
+});
+
+// ── ユーティリティ ──
+function fmtDate(d) {
+  return d.getFullYear() + '.' +
+    String(d.getMonth()+1).padStart(2,'0') + '.' +
+    String(d.getDate()).padStart(2,'0');
+}
+
+// ── 初期化 ──
 loadPosts();
 </script>
+
 </body>
 </html>
